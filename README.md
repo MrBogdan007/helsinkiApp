@@ -13,7 +13,7 @@ Tech stacks recommendation:
 
 - React
 - Redux
-- `react-mapbox-gl` or `google-map-react`
+- `react-mapbox-gl` or `@react-google-maps/api`
   for displaying map
 
 Reference:
