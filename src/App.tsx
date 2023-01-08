@@ -1,13 +1,22 @@
-import React from "react"
-import "./App.css"
+
+import { useEffect } from 'react';
+
+import { fetchPlaces } from './redux/reducers/map';
+
+import './App.css';
+import Map from './components/Map';
+import { useAppDispatch } from './redux/hooks';
 
 function App() {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchPlaces());
+  },[])
   return (
     <div className="App">
-      <header className="App-header">React Helsinki Places App - Extra assignment</header>
-     
+    <Map/>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
