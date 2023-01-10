@@ -6,7 +6,7 @@ import { Place } from "../../types/places";
 
 const initialState:Place[] =  [];
 export const fetchPlaces = createAsyncThunk("comment", async () => {
-  const result = await axios.get('https://open-api.myhelsinki.fi/v1/places/');
+  const result = await axios.get('https://open-api.myhelsinki.fi/v1/places/?limit=10');
   const data = result.data;
   console.log(data);
   
