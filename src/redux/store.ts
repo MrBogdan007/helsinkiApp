@@ -3,7 +3,7 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import mapReducer from './reducers/map';
 
 export const store = configureStore({
-  reducer: mapReducer,
+  reducer: {mapReducer,}
 });
 
 export type AppDispatch = typeof store.dispatch;

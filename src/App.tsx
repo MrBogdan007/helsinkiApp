@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { fetchPlaces } from './redux/reducers/map';
 
 import './App.css';
-import Map from './components/Map';
+import Places from './components/Places';
 import { useAppDispatch } from './redux/hooks';
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
   },[])
   return (
     <div className="App">
-    <Map/>
+    <Places/>
     </div>
   );
 }
