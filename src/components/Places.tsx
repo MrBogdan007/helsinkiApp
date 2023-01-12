@@ -22,6 +22,14 @@ const Places = () => {
       center: [lng, lat],
       zoom: zoom,
     });
+    const popup = new mapboxgl.Popup({ closeOnClick: false })
+    .setLngLat([-96, 37.8])
+    .setHTML('<h1>Hello World!</h1>')
+    .addTo(map.current);
+    const marker = new mapboxgl.Marker()
+  .setLngLat([30.5, 50.5])
+  .setPopup(popup)
+  .addTo(map.current);
   });
 
   return (
@@ -29,6 +37,7 @@ const Places = () => {
           <div>
           <div ref={mapContainer} className="map-container" />
         </div>
+
       {places.map((place) => (
 
         <div className="places" key={place.id}>
