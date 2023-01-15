@@ -1,18 +1,17 @@
-.places {
+.names {
   position: absolute;
   top: 0;
-  left: 0;
-  z-index: 100;
-}
-.places-block {
-  background-color: #fff;
-  position: relative;
-  padding: auto;
-  height: 400px;
-  width: 300px;
 }
 
 .map-container {
   height: 100vh;
-  position: relative;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }

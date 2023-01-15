@@ -13,8 +13,9 @@ const Places = () => {
   const [lng, setLng] = useState(24.945831);
   const [lat, setLat] = useState(60.1699);
   const [zoom, setZoom] = useState(12);
-  useEffect(() => {
-    if (map.current) return; // initialize map only once
+  const names = places.map(place => place.name.en).join();
+useEffect(() => {
+  if (map.current) return; // initialize map only once
 
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
@@ -22,23 +23,32 @@ const Places = () => {
       center: [lng, lat],
       zoom: zoom,
     });
-    const popup = new mapboxgl.Popup({ closeOnClick: false })
-    .setLngLat([-96, 37.8])
-    .setHTML('<h1>Hello World!</h1>')
+},[])
+  useEffect(() => {
+    places.forEach((place) => {
+      const popup = new mapboxgl.Popup({ offset:30 })
+      .setLngLat([24.945831, 60.1699])
+      .setHTML('<h4>'+ names + '</h4>')
+      .addTo(map.current);
+      const marker = new mapboxgl.Marker()
+    .setLngLat([24.945831, 60.1699])
+    .setPopup(popup)
     .addTo(map.current);
-    const marker = new mapboxgl.Marker()
-  .setLngLat([30.5, 50.5])
-  .setPopup(popup)
-  .addTo(map.current);
-  });
+    })
+   
+  },[places]);
+
+  
 
   return (
     <>
           <div>
           <div ref={mapContainer} className="map-container" />
         </div>
-
-      {places.map((place) => (
+      <div className="names">
+      
+      </div>
+      {/* {places.map((place) => (
 
         <div className="places" key={place.id}>
           <div className="places-block">
@@ -48,7 +58,7 @@ const Places = () => {
           </div>
 
         </div>
-      ))}
+      ))} */}
     </>
   );
 };

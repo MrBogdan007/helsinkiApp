@@ -20,8 +20,7 @@ const places = createSlice({
   },
   extraReducers: (build) => {
     build.addCase(fetchPlaces.fulfilled, (state,action) => {
-      console.log(action.payload);
-      
+
       return action.payload.data;
     });
   },
