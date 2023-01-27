@@ -2,6 +2,7 @@ import { useAppSelector } from "../redux/hooks";
 import Map from "react-map-gl";
 import mapboxgl from "mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import { useEffect, useRef, useState } from "react";
+import background from "../img/marker.png";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoibXJib2dkYW4wMTAxIiwiYSI6ImNsY3B0b2w3ZTJhN3UzcG10OWhvajlkdGEifQ.XMVy3JmEQhjeMer99ybuNg";
@@ -24,13 +25,20 @@ useEffect(() => {
       zoom: zoom,
     });
 },[])
+
+var el = document.createElement('div');
+el.className = 'marker';
+el.style.backgroundImage = `url(${background})`;
+el.style.width = `30px`;
+el.style.height = `120px`;
+el.style.backgroundSize = '100%';
   useEffect(() => {
     places.forEach((place) => {
-      const popup = new mapboxgl.Popup({ offset:30 })
+      const popup = new mapboxgl.Popup({ offset:30})
       .setLngLat([24.945831, 60.1699])
       .setHTML('<h4>'+ names + '</h4>')
       .addTo(map.current);
-      const marker = new mapboxgl.Marker()
+      const marker = new mapboxgl.Marker({element:el })
     .setLngLat([24.945831, 60.1699])
     .setPopup(popup)
     .addTo(map.current);
