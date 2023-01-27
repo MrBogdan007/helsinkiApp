@@ -12,5 +12,9 @@ export interface Place {
          opens: string,
          closes: string
       ]
+   },
+   location: {
+      lat: number,
+      lon: number
    }
 }

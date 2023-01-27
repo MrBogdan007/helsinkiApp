@@ -9,12 +9,15 @@ mapboxgl.accessToken =
 const Places = () => {
   const places = useAppSelector((state) => state.mapReducer);
   console.log(places);
+  const longlat = places.map(place => place.location.lon);
+  console.log(longlat);
+  
   const mapContainer = useRef<any>(null);
   const map = useRef<any>(null);
   const [lng, setLng] = useState(24.945831);
   const [lat, setLat] = useState(60.1699);
   const [zoom, setZoom] = useState(12);
-  const names = places.map(place => place.name.en).join();
+  
 useEffect(() => {
   if (map.current) return; // initialize map only once
 
@@ -26,22 +29,21 @@ useEffect(() => {
     });
 },[])
 
-var el = document.createElement('div');
-el.className = 'marker';
-el.style.backgroundImage = `url(${background})`;
-el.style.width = `30px`;
-el.style.height = `120px`;
-el.style.backgroundSize = '100%';
+
+
   useEffect(() => {
     places.forEach((place) => {
       const popup = new mapboxgl.Popup({ offset:30})
-      .setLngLat([24.945831, 60.1699])
-      .setHTML('<h4>'+ names + '</h4>')
+      .setLngLat([place.location.lon, place.location.lat])
+      .setHTML('<h4>'+ place.name.en+ '</h4>')
       .addTo(map.current);
-      const marker = new mapboxgl.Marker({element:el })
-    .setLngLat([24.945831, 60.1699])
+      console.log(place.location.lon + "lon");
+      console.log(place.location.lat + "lat");
+      const marker = new mapboxgl.Marker()
+    .setLngLat([place.location.lon, place.location.lat])
     .setPopup(popup)
     .addTo(map.current);
+ 
     })
    
   },[places]);
