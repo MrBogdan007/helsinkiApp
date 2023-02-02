@@ -3,14 +3,38 @@ import Map from "react-map-gl";
 import mapboxgl from "mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import { useEffect, useRef, useState } from "react";
 import background from "../img/marker.png";
+import { Week } from "../types/week";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoibXJib2dkYW4wMTAxIiwiYSI6ImNsY3B0b2w3ZTJhN3UzcG10OWhvajlkdGEifQ.XMVy3JmEQhjeMer99ybuNg";
 const Places = () => {
   const places = useAppSelector((state) => state.mapReducer);
-  console.log(places);
+
+
   const longlat = places.map(place => place.location.lon);
-  console.log(longlat);
+  const time = places.forEach((place) => {
+    const mapped = place.opening_hours.hours.map(mappeditem => mappeditem);
+    console.log(mapped);
+    
+    
+
+  
+  });
+
+ 
+//  console.log(time);
+ 
+//   const retrieveData =(time:any) => {
+//     console.log(time);
+    
+//     const timeLastElementLenght = time[time.length-1].weekday_id;    
+//     console.log(timeLastElementLenght);
+    
+//   }
+  
+//  retrieveData(time);
+
+  
   
   const mapContainer = useRef<any>(null);
   const map = useRef<any>(null);
@@ -33,12 +57,30 @@ useEffect(() => {
 
   useEffect(() => {
     places.forEach((place) => {
+      const mappedPlace= place.opening_hours.hours.map(mappeditem => mappeditem);
+      console.log(mappedPlace);
+      
+      
+      
       const popup = new mapboxgl.Popup({ offset:30})
       .setLngLat([place.location.lon, place.location.lat])
-      .setHTML('<h4>'+ place.name.en+ '</h4>')
+      .setHTML('<h4>'+ place.name.en+ '</h4>'+ 
+      '<div>'+ place.location.address.street_address+
+      '</div>'
+      + '<div>'+
+      'Opening Hours: '+
+      '</div>'
+      +
+      ' <div>'+ '<span>'+
+      'Monday : '+ mappedPlace[0].closes +'</span>' 
+      +
+      '</div>'
+      + '<div>'+ time+'</div>'
+      + '<div>'+ time+'</div>'
+      + '<div>'+ time+'</div>'
+      )
       .addTo(map.current);
-      console.log(place.location.lon + "lon");
-      console.log(place.location.lat + "lat");
+
       const marker = new mapboxgl.Marker()
     .setLngLat([place.location.lon, place.location.lat])
     .setPopup(popup)
@@ -48,7 +90,9 @@ useEffect(() => {
    
   },[places]);
 
-  
+
+
+
 
   return (
     <>
