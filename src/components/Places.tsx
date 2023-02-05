@@ -64,21 +64,21 @@ useEffect(() => {
       
       const popup = new mapboxgl.Popup({ offset: {'left':[0,0]}})
       
-      .setHTML('<h4>'+ place.name.en+ '</h4>'+ 
-      '<div>'+ place.location.address.street_address+
-      '</div>'
-      + '<div>'+
-      'Opening Hours: '+
-      '</div>'
-      +
-      ' <div>'+ '<span>'+
-      'Monday : '+ mappedPlace[0].closes +'</span>' 
-      +
-      '</div>'
-      + '<div>'+ time+'</div>'
-      + '<div>'+ time+'</div>'
-      + '<div>'+ time+'</div>'
-      )
+      .setHTML(`<h4> place.name.en+ </h4>
+      <div> place.location.address.street_address
+      </div>
+      <div>
+      Opening Hours: 
+      </div>
+      
+      <div><span>
+      Monday : ${mappedPlace[0].closes} </span>
+      
+      </div>
+      <div> time+</div>
+      <div> time</div>
+      <div> time</div>
+      `)
       .addTo(map.current);
 
       const marker = new mapboxgl.Marker({color: "red"})
