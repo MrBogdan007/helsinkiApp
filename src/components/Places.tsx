@@ -14,7 +14,7 @@ const Places = () => {
   const longlat = places.map(place => place.location.lon);
   const time = places.forEach((place) => {
     const mapped = place.opening_hours.hours.map(mappeditem => mappeditem);
-    console.log(mapped);
+    
     
     
 
@@ -62,8 +62,8 @@ useEffect(() => {
       
       
       
-      const popup = new mapboxgl.Popup({ offset:30})
-      .setLngLat([place.location.lon, place.location.lat])
+      const popup = new mapboxgl.Popup({ offset: {'left':[0,0]}})
+      
       .setHTML('<h4>'+ place.name.en+ '</h4>'+ 
       '<div>'+ place.location.address.street_address+
       '</div>'
@@ -81,7 +81,7 @@ useEffect(() => {
       )
       .addTo(map.current);
 
-      const marker = new mapboxgl.Marker()
+      const marker = new mapboxgl.Marker({color: "red"})
     .setLngLat([place.location.lon, place.location.lat])
     .setPopup(popup)
     .addTo(map.current);
